@@ -1,0 +1,8 @@
+#*
+*.6
+*.a
+*.o
+*~
+/example/example
+6.out
+_*
