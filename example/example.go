@@ -7,9 +7,8 @@ import (
 )
 
 func main() {
-	s := http.Server{}
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, "Hello, %q\n", r.URL.Path)
 	})
-	stdinweb.ServeStdin(s)
+	stdinweb.ServeStdin(http.Server{})
 }
