@@ -8,7 +8,8 @@ import (
 
 func main() {
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintf(w, "Hello, %q\n", r.URL.Path)
+		fmt.Fprintf(w, "Hello, %v, you wanted %q\n",
+			r.RemoteAddr, r.URL.Path)
 	})
 	stdinweb.ServeStdin(http.Server{})
 }

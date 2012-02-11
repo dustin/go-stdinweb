@@ -6,6 +6,7 @@ import (
 	"net"
 	"net/http"
 	"os"
+	"syscall"
 	"time"
 )
 
@@ -56,6 +57,13 @@ func (sl *stdioConn) LocalAddr() net.Addr {
 }
 
 func (sl *stdioConn) RemoteAddr() net.Addr {
+	sa, _ := syscall.Getpeername(os.Stdin.Fd())
+	switch sa := sa.(type) {
+	case *syscall.SockaddrInet4:
+		return &net.IPAddr{sa.Addr[0:]}
+	case *syscall.SockaddrInet6:
+		return &net.IPAddr{sa.Addr[0:]}
+	}
 	return sl.LocalAddr()
 }
 
