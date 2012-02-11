@@ -1,3 +1,4 @@
+// Adaptor for running http.Server out of inetd or similar.
 package stdinweb
 
 import (
@@ -75,6 +76,7 @@ func (sl *stdioConn) Close() error {
 	return nil
 }
 
+// Run the HTTP server on stdio.
 func ServeStdin(s http.Server) error {
 	var sl stdioListener
 	return s.Serve(&sl)
