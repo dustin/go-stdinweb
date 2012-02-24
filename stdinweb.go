@@ -57,7 +57,7 @@ func (sl *stdioConn) LocalAddr() net.Addr {
 }
 
 func (sl *stdioConn) RemoteAddr() net.Addr {
-	sa, _ := syscall.Getpeername(os.Stdin.Fd())
+	sa, _ := syscall.Getpeername(int(os.Stdin.Fd()))
 	switch sa := sa.(type) {
 	case *syscall.SockaddrInet4:
 		return &net.IPAddr{sa.Addr[0:]}
